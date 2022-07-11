@@ -80,8 +80,6 @@ public class UserService {
         if (user == null) {
             user = new User();
             user.setMobile(phone);
-            user.setCreated(new Date());
-            user.setUpdated(new Date());
             user.setPassword(DigestUtils.md2Hex("123456"));
             Long userId = userApi.save(user);
             user.setId(userId);

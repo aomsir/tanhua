@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @Author: Aomsir
@@ -17,10 +15,9 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
+public class User extends BasePojo {
     private Long id;
     private String mobile;
     private String password;
-    private Date created;
-    private Date updated;
+
 }
