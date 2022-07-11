@@ -1,0 +1,6 @@
+# Project exclude paths
+/tanhua-app-server/target/
+/tanhua-autoconfig/target/
+/tanhua-commons/target/
+/tanhua-dubbo/tanhua-dubbo-interface/target/
+/tanhua-model/target/
