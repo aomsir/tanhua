@@ -35,7 +35,7 @@ public class OssTest {
 
     @Test
     public void testTemplateUpdate() throws Exception{
-        String path = "/Users/aomsir/Downloads/iShot_2022-07-11_21.21.38.png";
+        String path = "/Users/aomsir/Pictures/背景/壁纸/38.JPG";
         FileInputStream fis = new FileInputStream(new File(path));
         String url = ossTemplate.update("1.jpg", fis);
         System.out.println(url);
