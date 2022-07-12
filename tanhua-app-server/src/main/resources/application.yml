@@ -23,3 +23,9 @@ tanhua:
     templateCode:
     accessKey:
     secret:
+  oss:
+    accessKey:
+    secret:
+    bucketName:
+    url:
+    endpoint:

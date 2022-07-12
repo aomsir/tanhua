@@ -30,8 +30,8 @@ public class LoginController {
      * @return
      */
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody Map map) {
-        String phone = (String) map.get("phone");
+    public ResponseEntity<Object> login(@RequestBody Map<String,String> map) {
+        String phone = map.get("phone");
         userService.sendMsg(phone);
         // ResponseEntity.status(500).body("出错啦！");
         return ResponseEntity.ok(null);
@@ -44,10 +44,10 @@ public class LoginController {
      * @return
      */
     @PostMapping("/loginVerification")
-    public ResponseEntity loginVerification(@RequestBody Map map) {
+    public ResponseEntity<Object> loginVerification(@RequestBody Map<String,String> map) {
         // 1.调用map集合获取请求参数
-        String phone = (String) map.get("phone");
-        String code = (String) map.get("verificationCode");
+        String phone = map.get("phone");
+        String code = map.get("verificationCode");
 
         // 2.调用userService完成用户登录
         Map retMap = userService.loginVerification(phone,code);

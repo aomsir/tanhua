@@ -1,11 +1,13 @@
 package com.aomsir.test;
 
+import com.aomsir.autoconfig.template.SmsTemplate;
 import com.aomsir.dubbo.api.UserApi;
 import com.aomsir.model.domain.User;
 import com.aomsir.server.AppServerApplication;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -20,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AppServerApplication.class)
 public class UserApiTest {
+
     @DubboReference
     private UserApi userApi;
 

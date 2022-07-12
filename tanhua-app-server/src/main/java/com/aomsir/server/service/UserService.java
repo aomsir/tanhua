@@ -95,7 +95,7 @@ public class UserService {
         // 7.构造返回值
         Map retMap = new HashMap();
         retMap.put("token",token);
-        retMap.put("isNew",isNew);
+        retMap.put("isNew",isNew);   // 客户端校验执行流程
 
         return retMap;
     }
