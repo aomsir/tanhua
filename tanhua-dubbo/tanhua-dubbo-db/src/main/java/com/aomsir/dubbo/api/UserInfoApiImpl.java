@@ -18,6 +18,7 @@ public class UserInfoApiImpl implements UserInfoApi{
     @Autowired
     private UserInfoMapper userInfoMapper;
 
+
     @Override
     public void save(UserInfo userInfo) {
         userInfoMapper.insert(userInfo);
@@ -26,5 +27,10 @@ public class UserInfoApiImpl implements UserInfoApi{
     @Override
     public void update(UserInfo userInfo) {
         userInfoMapper.updateById(userInfo);
+    }
+
+    @Override
+    public UserInfo findById(Long id) {
+        return userInfoMapper.selectById(id);
     }
 }

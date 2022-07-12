@@ -4,6 +4,8 @@ import com.aomsir.autoconfig.template.SmsTemplate;
 import com.aomsir.commons.utils.JwtUtils;
 import com.aomsir.dubbo.api.UserApi;
 import com.aomsir.model.domain.User;
+import com.aomsir.model.vo.ErrorResult;
+import com.aomsir.server.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -68,7 +70,7 @@ public class UserService {
         // 2.对验证码进行校验
         if (StringUtils.isEmpty(redisCode) || !redisCode.equals(code)) {
             // 验证码无效
-            throw new RuntimeException("验证码无效");
+            throw new BusinessException(ErrorResult.loginError());
         }
 
         // 3.删除Redis中的验证码

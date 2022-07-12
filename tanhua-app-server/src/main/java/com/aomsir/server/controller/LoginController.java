@@ -1,5 +1,7 @@
 package com.aomsir.server.controller;
 
+import com.aomsir.model.vo.ErrorResult;
+import com.aomsir.server.exception.BusinessException;
 import com.aomsir.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

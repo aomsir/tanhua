@@ -4,6 +4,7 @@ import com.baidu.aip.face.AipFace;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 
 /**
@@ -14,7 +15,7 @@ import java.util.HashMap;
  * @GitHub: https://github.com/aomsir
  */
 public class AipFaceTemplate {
-    @Autowired
+    @Resource
     private AipFace client;
 
     /**
