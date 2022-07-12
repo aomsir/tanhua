@@ -4,6 +4,7 @@ import com.aomsir.autoconfig.template.SmsTemplate;
 import com.aomsir.commons.utils.JwtUtils;
 import com.aomsir.dubbo.api.UserApi;
 import com.aomsir.model.domain.User;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +26,7 @@ import java.util.Map;
  * @GitHub: https://github.com/aomsir
  */
 
+@Slf4j
 @Service
 public class UserService {
     private final String redisPrefix = "CHECK_CODE_";
@@ -91,6 +93,7 @@ public class UserService {
         tokenMap.put("id",user.getId());
         tokenMap.put("mobile",phone);
         String token = JwtUtils.getToken(tokenMap);
+        log.info(token);
 
         // 7.构造返回值
         Map retMap = new HashMap();

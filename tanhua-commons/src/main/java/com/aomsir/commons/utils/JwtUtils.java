@@ -16,8 +16,9 @@ import java.util.Map;
  * @GitHub: https://github.com/aomsir
  */
 public class JwtUtils {
+
     // TOKEN的有效期1小时（S）
-    private static final int TOKEN_TIME_OUT = 1 * 3600;
+    private static final int TOKEN_TIME_OUT = 3_600;
 
     // 加密KEY
     private static final String TOKEN_SECRET = "aomsir";
@@ -55,7 +56,7 @@ public class JwtUtils {
 
         try {
             Claims claims = Jwts.parser()
-                    .setSigningKey("itcast")
+                    .setSigningKey("aomsir")
                     .parseClaimsJws(token)
                     .getBody();
         }catch (Exception e) {
