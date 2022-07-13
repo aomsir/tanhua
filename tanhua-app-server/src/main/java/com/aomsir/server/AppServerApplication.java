@@ -2,6 +2,8 @@ package com.aomsir.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 
 /**
  * @Author: Aomsir
@@ -11,7 +13,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @GitHub: https://github.com/aomsir
  */
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+        MongoAutoConfiguration.class,
+        MongoDataAutoConfiguration.class
+})
 public class AppServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(AppServerApplication.class, args);
