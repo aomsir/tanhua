@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @Author: Aomsir
  * @Date: 2022/7/12
- * @Description:
+ * @Description: 拦截器,对每个拦截的请求进行拦截赋值
  * @Email: info@say521.cn
  * @GitHub: https://github.com/aomsir
  */

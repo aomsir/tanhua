@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserInfo implements Serializable {
+public class UserInfo extends BasePojo {
 
     /**
      * 由于userinfo表和user表之间是一对一关系
@@ -33,8 +33,6 @@ public class UserInfo implements Serializable {
     private Integer marriage; //婚姻状态
     private String tags; //用户标签：多个用逗号分隔
     private String coverPic; // 封面图片
-    private Date created;
-    private Date updated;
 
     //用户状态,1为正常，2为冻结
     @TableField(exist = false)

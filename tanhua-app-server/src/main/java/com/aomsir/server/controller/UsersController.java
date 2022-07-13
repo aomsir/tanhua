@@ -1,11 +1,10 @@
 package com.aomsir.server.controller;
 
-import com.aomsir.commons.utils.JwtUtils;
+
 import com.aomsir.model.domain.UserInfo;
 import com.aomsir.model.vo.UserInfoVo;
 import com.aomsir.server.interceptor.UserHolder;
 import com.aomsir.server.service.UserInfoService;
-import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,24 +23,32 @@ public class UsersController {
     @Autowired
     private UserInfoService userInfoService;
 
+    /**
+     * 查询用户信息
+     * @param userID
+     * @return
+     */
     @GetMapping()
-    public ResponseEntity users(@RequestHeader("Authorization") String token,
-                                Long userID) {
+    public ResponseEntity<UserInfoVo> users(Long userID) {
 
         // 判断用户ID
         if (userID == null) {
             userID = UserHolder.getUserId();
         }
 
-        UserInfoVo userInfo = userInfoService.findById(userID);
+        UserInfoVo userInfoVo = userInfoService.findById(userID);
 
-        return ResponseEntity.ok().body(userInfo);
+        return ResponseEntity.ok().body(userInfoVo);
     }
 
 
+    /**
+     * 更新用户信息
+     * @param userInfo
+     * @return
+     */
     @PutMapping()
-    public ResponseEntity updateUserInfo(@RequestHeader("Authorization") String token,
-                                         @RequestBody UserInfo userInfo) {
+    public ResponseEntity<UserInfo> updateUserInfo(@RequestBody UserInfo userInfo) {
 
         // 设置用户id
         userInfo.setId(UserHolder.getUserId());

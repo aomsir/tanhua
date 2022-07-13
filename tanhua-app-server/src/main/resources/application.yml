@@ -17,19 +17,3 @@ dubbo:    #dubbo配置
     address: spring-cloud://192.168.212.111:8848
   consumer:
     check: false
-tanhua:
-  sms:
-    signName:
-    templateCode:
-    accessKey:
-    secret:
-  oss:
-    accessKey:
-    secret:
-    bucketName:
-    url:
-    endpoint:
-  aip:
-    appId:
-    apiKey:
-    secretKey:

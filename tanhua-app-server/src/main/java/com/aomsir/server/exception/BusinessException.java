@@ -16,7 +16,10 @@ public class BusinessException extends RuntimeException{
     private ErrorResult errorResult;
 
     public BusinessException(ErrorResult errorResult) {
+        // 调父类构造器
         super(errorResult.getErrMessage());
+
+        // 赋值是为了ExceptionActive能够获取
         this.errorResult = errorResult;
     }
 }

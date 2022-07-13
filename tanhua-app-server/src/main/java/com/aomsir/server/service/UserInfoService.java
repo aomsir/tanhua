@@ -53,12 +53,12 @@ public class UserInfoService {
         } else {
             // 包含人脸，调用API及时更新
             UserInfo userInfo = new UserInfo();
-            userInfo.setId(Long.valueOf(id));
+            userInfo.setId(id);
             userInfo.setAvatar(imageUrl);
+
+            // 这次更新会根据id更新
             userInfoApi.update(userInfo);
         }
-
-
     }
 
     // 根据id查询

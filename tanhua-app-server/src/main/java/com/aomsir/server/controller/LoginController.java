@@ -1,7 +1,6 @@
 package com.aomsir.server.controller;
 
-import com.aomsir.model.vo.ErrorResult;
-import com.aomsir.server.exception.BusinessException;
+
 import com.aomsir.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +51,7 @@ public class LoginController {
         String code = map.get("verificationCode");
 
         // 2.调用userService完成用户登录
-        Map retMap = userService.loginVerification(phone,code);
+        Map<String,String> retMap = userService.loginVerification(phone,code);
 
         // 3.构造返回
         return ResponseEntity.ok(retMap);
