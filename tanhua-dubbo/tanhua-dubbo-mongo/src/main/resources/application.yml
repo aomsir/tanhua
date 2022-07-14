@@ -15,6 +15,6 @@ dubbo:
     name: dubbo
     port: 20882
   registry:
-    address: spring-cloud://192.168.212.111:8848
+    address: spring-cloud://localhost
   scan:
     base-packages: com.aomsir.dubbo.api  #dubbo中包扫描

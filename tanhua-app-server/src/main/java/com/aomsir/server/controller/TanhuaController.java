@@ -1,5 +1,7 @@
 package com.aomsir.server.controller;
 
+import com.aomsir.model.dto.RecommendUserDto;
+import com.aomsir.model.vo.PageResult;
 import com.aomsir.model.vo.TodayBest;
 import com.aomsir.server.service.TanhuaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +29,17 @@ public class TanhuaController {
     public ResponseEntity<TodayBest> todayBest() {
         TodayBest vo = tanhuaService.todayBest();
         return ResponseEntity.ok().body(vo);
+    }
+
+
+    /**
+     * 查询分页推荐好友
+     * @param dto
+     * @return
+     */
+    @GetMapping("/recommendation")
+    public ResponseEntity<PageResult> recommendation(RecommendUserDto dto) {
+        PageResult pr = tanhuaService.recommendation(dto);
+        return ResponseEntity.ok().body(pr);
     }
 }

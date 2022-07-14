@@ -48,10 +48,11 @@ public class UserService {
      */
     public void sendMsg(String phone) {
         // 1.生成随机6位验证码
-         String code = RandomStringUtils.randomNumeric(6);
-
-        // 2.调用template对象发送短信
-          template.sendSms(phone,code);
+//         String code = RandomStringUtils.randomNumeric(6);
+//
+//        // 2.调用template对象发送短信
+//          template.sendSms(phone,code);
+        String code = "123456";
 
         // 3.将验证码存入Redis,5分钟失效
         redisTemplate.opsForValue().set(redisPrefix+phone,code, Duration.ofMinutes(5));
