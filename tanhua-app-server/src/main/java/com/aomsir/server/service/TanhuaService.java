@@ -1,5 +1,6 @@
 package com.aomsir.server.service;
 
+import cn.hutool.core.collection.CollUtil;
 import com.aomsir.dubbo.api.RecommendUserApi;
 import com.aomsir.dubbo.api.UserInfoApi;
 import com.aomsir.model.domain.UserInfo;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: Aomsir
@@ -54,40 +56,86 @@ public class TanhuaService {
         return vo;
     }
 
+//    /**
+//     * 查询分页推荐好友列表
+//     * @param dto
+//     * @return
+//     */
+//    public PageResult recommendation(RecommendUserDto dto) {
+//        //1、获取用户id
+//        Long userId = UserHolder.getUserId();
+//        //2、调用recommendUserApi分页查询数据列表（PageResult -- RecommendUser）
+//        PageResult pr = recommendUserApi.queryRecommendUserList(dto.getPage(),dto.getPagesize(),userId);
+//        //3、获取分页中的RecommendUser数据列表
+//        List<RecommendUser> items = (List<RecommendUser>) pr.getItems();
+//        //4、判断列表是否为空
+//        if(items == null) {
+//            return pr;
+//        }
+//        //5、循环RecommendUser数据列表，根据推荐的用户id查询用户详情
+//        List<TodayBest> list = new ArrayList<>();
+//        for (RecommendUser item : items) {
+//            Long recommendUserId = item.getUserId();
+//            UserInfo userInfo = userInfoApi.findById(recommendUserId);
+//            if(userInfo != null) {
+//                //条件判断
+//                if(!StringUtils.isEmpty(dto.getGender()) && !dto.getGender().equals(userInfo.getGender())) {
+//                    continue;
+//                }
+//                if(dto.getAge() != null && dto.getAge() < userInfo.getAge()) {
+//                    continue;
+//                }
+//                TodayBest vo = TodayBest.init(userInfo, item);
+//                list.add(vo);
+//            }
+//        }
+//        //6、构造返回值
+//        pr.setItems(list);
+//        return pr;
+//    }
+
     /**
-     * 查询分页推荐好友列表
+     * 查询分页推荐好友列表优化版本
+     * 不会频繁调用远程数据库
      * @param dto
      * @return
      */
     public PageResult recommendation(RecommendUserDto dto) {
-        //1、获取用户id
+        // 1、获取用户id
         Long userId = UserHolder.getUserId();
-        //2、调用recommendUserApi分页查询数据列表（PageResult -- RecommendUser）
+
+        // 2、调用recommendUserApi分页查询数据列表（PageResult -- RecommendUser）
         PageResult pr = recommendUserApi.queryRecommendUserList(dto.getPage(),dto.getPagesize(),userId);
-        //3、获取分页中的RecommendUser数据列表
+
+        // 3、获取分页中的RecommendUser数据列表
         List<RecommendUser> items = (List<RecommendUser>) pr.getItems();
-        //4、判断列表是否为空
+
+        // 4、判断列表是否为空
         if(items == null) {
             return pr;
         }
-        //5、循环RecommendUser数据列表，根据推荐的用户id查询用户详情
+
+        // 5.提取所有用户的id列表
+        List<Long> ids = CollUtil.getFieldValues(items, "userId",Long.class);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setAge(dto.getAge());
+        userInfo.setGender(dto.getGender());
+
+        // 6.构建查询条件，批量查询所有的用户详情
+        Map<Long, UserInfo> map = userInfoApi.findByIds(ids, userInfo);
+
+        // 7.循环推荐的数据列表,构建vo对象
         List<TodayBest> list = new ArrayList<>();
         for (RecommendUser item : items) {
-            Long recommendUserId = item.getUserId();
-            UserInfo userInfo = userInfoApi.findById(recommendUserId);
-            if(userInfo != null) {
-                //条件判断
-                if(!StringUtils.isEmpty(dto.getGender()) && !dto.getGender().equals(userInfo.getGender())) {
-                    continue;
-                }
-                if(dto.getAge() != null && dto.getAge() < userInfo.getAge()) {
-                    continue;
-                }
+            UserInfo info = map.get(item.getUserId());
+            if (info != null) {
                 TodayBest vo = TodayBest.init(userInfo, item);
                 list.add(vo);
             }
+
         }
-        //6、构造返回值
+
+        // 8.构造返回
         pr.setItems(list);
         return pr;
     }
