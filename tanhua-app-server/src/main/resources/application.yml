@@ -17,3 +17,4 @@ dubbo:    #dubbo配置
     address: spring-cloud://192.168.212.111:8848
   consumer:
     check: false
+1
