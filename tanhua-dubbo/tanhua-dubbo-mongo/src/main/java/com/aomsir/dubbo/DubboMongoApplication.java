@@ -2,6 +2,7 @@ package com.aomsir.dubbo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @Author: Aomsir
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 
 @SpringBootApplication
+@EnableAsync  // 支持异步多线程
 public class DubboMongoApplication {
     public static void main(String[] args) {
         SpringApplication.run(DubboMongoApplication.class,args);

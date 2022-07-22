@@ -111,7 +111,7 @@ public class TanhuaService {
         List<RecommendUser> items = (List<RecommendUser>) pr.getItems();
 
         // 4、判断列表是否为空
-        if(items == null) {
+        if(items == null || items.size() <= 0) {
             return pr;
         }
 
