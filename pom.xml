@@ -14,7 +14,8 @@
         <module>tanhua-commons</module>
         <module>tanhua-dubbo</module>
         <module>tanhua-model</module>
-<!--        <module>tanhua-dubbo/tanhua-dubbo-db</module>-->
+        <module>tanhua-gateway</module>
+        <!--        <module>tanhua-dubbo/tanhua-dubbo-db</module>-->
 <!--        <module>tanhua-dubbo/tanhua-dubbo-interface</module>-->
 <!--        <module>tanhua-dubbo/tanhua-dubbo-mongo</module>-->
     </modules>
